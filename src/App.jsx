@@ -49,7 +49,7 @@ function App() {
       <main id="top">
         <section className="hero section-shell">
           <div className="eyebrow"><span /> Available for collaboration</div>
-          <h1>I build useful things<br /><em>with data &amp; AI.</em></h1>
+          <h1>I build <span>useful things</span><br /><em>with data &amp; AI.</em></h1>
           <div className="hero-bottom">
             <p>I'm <strong>Sutha Thongkong</strong>, an AI &amp; Full-Stack Developer with a special interest in Data Science—turning complex information into clear, practical products.</p>
             <div className="hero-actions">
