@@ -1,0 +1,4 @@
+:root { font-synthesis:none; text-rendering:optimizeLegibility; -webkit-font-smoothing:antialiased; }
+body { min-width:320px; min-height:100vh; }
+button,a { outline-offset:4px; }
+::selection { background:#c8ff4d; color:#15190d; }
