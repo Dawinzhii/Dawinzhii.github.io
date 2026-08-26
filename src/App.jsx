@@ -19,13 +19,6 @@ const projects = [
   },
 ]
 
-const skills = [
-  ['Languages', 'JavaScript', 'Python', 'C#', 'CSS3'],
-  ['Frontend', 'React', 'React Native', 'Three.js', 'Tailwind CSS', 'DaisyUI'],
-  ['Backend & Data', 'Node.js', 'Express', 'ASP.NET Core', 'MySQL', 'ChromaDB'],
-  ['AI & Automation', 'LangChain', 'RAG', 'NLP', 'BGE-M3', 'n8n'],
-]
-
 function App() {
   const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark')
 
@@ -91,16 +84,39 @@ function App() {
         <section id="resume" className="resume" aria-labelledby="resume-title">
           <div className="section-shell">
             <div className="resume-heading">
-              <div><p className="section-label">03 / RESUME</p><h2 id="resume-title">Capabilities at a glance.</h2></div>
-              <button className="button print-button" type="button" onClick={() => window.print()}>Print / Save PDF <span>↗</span></button>
+              <div><p className="section-label">03 / RESUME</p><h2 id="resume-title">Experience &amp; education.</h2></div>
+              <a className="button print-button" href="/Sutha_Thongkong_FlowCV.pdf" download="Sutha_Thongkong_FlowCV.pdf">Download Resume PDF <span>↓</span></a>
             </div>
             <div className="resume-grid">
-              <div className="resume-summary">
-                <h3>Profile</h3><p>AI &amp; Full-Stack Developer building data-informed products, retrieval systems, automation workflows, and responsive applications.</p>
-                <h3>Focus</h3><p>Data Science · RAG · NLP · Automation · Full-Stack Development</p>
-              </div>
-              <div className="skill-groups">
-                {skills.map(([title, ...items]) => <div className="skill-group" key={title}><h3>{title}</h3><div>{items.map((item) => <span key={item}>{item}</span>)}</div></div>)}
+              <aside className="resume-sidebar">
+                <div><h3>Contact</h3><a href="mailto:dawinzhy.crypto@gmail.com">dawinzhy.crypto@gmail.com</a><a href="tel:+66897735638">089-7735638</a><span>Samutprakan, Thailand</span></div>
+                <div><h3>Online</h3><a href="https://www.linkedin.com/in/sutha-thongkong" target="_blank" rel="noreferrer">LinkedIn ↗</a><a href="https://github.com/Dawinzhii" target="_blank" rel="noreferrer">github.com/Dawinzhii ↗</a></div>
+              </aside>
+              <div className="resume-details">
+                <section className="resume-block">
+                  <p className="resume-kicker">Work Experience</p>
+                  <div className="resume-entry">
+                    <div className="resume-entry-head"><div><h3>Matix.co.,ltd</h3><p>Worker</p></div><span>11/2016 – 11/2019<br />Nishio, Aichi, Japan</span></div>
+                    <ul>
+                      <li>ปฏิบัติงานกลึงโลหะทุกวันเพื่อผลิตชิ้นส่วนตามแบบทางเทคนิค</li>
+                      <li>ใช้เครื่องมือวัด เช่น เวอร์เนียร์คาลิปเปอร์และไมโครมิเตอร์เพื่อตรวจสอบข้อกำหนด</li>
+                      <li>ทำความสะอาดเครื่องจักรและเปลี่ยนเครื่องมือขั้นพื้นฐานเพื่อป้องกันการชำรุดเสียหายระหว่างกะทำงาน</li>
+                      <li>บรรลุเป้าหมายผลผลิตรายวัน พร้อมทั้งรักษาความสะอาดและความปลอดภัยของพื้นที่ทำงาน (5S)</li>
+                    </ul>
+                  </div>
+                </section>
+
+                <section className="resume-block">
+                  <p className="resume-kicker">Education</p>
+                  <div className="resume-entry compact"><div><h3>Bachelor's Degree</h3><p>Sripatum University</p></div><span>2023 – Present<br />Bangkok</span></div>
+                  <div className="resume-entry compact"><div><h3>High Vocational Certificate in Computer Technician</h3><p>Samutprakan Technical College</p></div><span>2013 – 2015</span></div>
+                </section>
+
+                <section className="resume-block">
+                  <p className="resume-kicker">Projects</p>
+                  <div className="resume-entry"><h3>BuddyBuilder AI</h3><p>พัฒนาระบบ AI ที่ปรึกษาที่ขับเคลื่อนด้วย RAG สำหรับแอปพลิเคชันออกแบบตกแต่งภายในบนเว็บ โดยใช้ LLM เข้ากับฮวงจุ้ยแบบดั้งเดิมและสถาปัตยกรรมเชิงพื้นที่ เพื่อให้คำแนะนำเกี่ยวกับการจัดวางห้องและเฟอร์นิเจอร์ที่เหมาะสมกับความต้องการและข้อจำกัดของแต่ละบุคคล</p></div>
+                  <div className="resume-entry"><h3>Slide Me</h3><p>พัฒนาแอปพลิเคชันบนมือถือสำหรับบริการลากรถแบบเรียกใช้บริการตามต้องการ โดยใช้ React Native ซึ่งช่วยให้สามารถจับคู่คนขับและติดตามตำแหน่งได้</p></div>
+                </section>
               </div>
             </div>
           </div>
