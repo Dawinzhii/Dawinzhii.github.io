@@ -17,6 +17,11 @@ const projects = [
     description: 'A chat-first workflow for recording personal finances instantly and keeping the data organized.',
     highlights: ['n8n, LINE Messaging API & Google Sheets', 'Real-time expense logging through chat', 'AI-assisted transaction categorization'],
   },
+  {
+    number: '04', type: 'MOBILE · TRANSPORTATION', title: 'SlideMe',
+    description: 'A mobile app for requesting slide and tow truck services when and where they are needed.',
+    highlights: ['Built with React Native', 'SQL database', 'Driver matching and location tracking'],
+  },
 ]
 
 function App() {
@@ -112,11 +117,6 @@ function App() {
                   <div className="resume-entry compact"><div><h3>High Vocational Certificate in Computer Technician</h3><p>Samutprakan Technical College</p></div><span>2013 – 2015</span></div>
                 </section>
 
-                <section className="resume-block">
-                  <p className="resume-kicker">Projects</p>
-                  <div className="resume-entry"><h3>BuddyBuilder AI</h3><p>พัฒนาระบบ AI ที่ปรึกษาที่ขับเคลื่อนด้วย RAG สำหรับแอปพลิเคชันออกแบบตกแต่งภายในบนเว็บ โดยใช้ LLM เข้ากับฮวงจุ้ยแบบดั้งเดิมและสถาปัตยกรรมเชิงพื้นที่ เพื่อให้คำแนะนำเกี่ยวกับการจัดวางห้องและเฟอร์นิเจอร์ที่เหมาะสมกับความต้องการและข้อจำกัดของแต่ละบุคคล</p></div>
-                  <div className="resume-entry"><h3>Slide Me</h3><p>พัฒนาแอปพลิเคชันบนมือถือสำหรับบริการลากรถแบบเรียกใช้บริการตามต้องการ โดยใช้ React Native ซึ่งช่วยให้สามารถจับคู่คนขับและติดตามตำแหน่งได้</p></div>
-                </section>
               </div>
             </div>
           </div>
