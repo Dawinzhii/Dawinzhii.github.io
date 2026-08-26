@@ -90,7 +90,6 @@ function App() {
           <div className="section-shell">
             <div className="resume-heading">
               <div><p className="section-label">03 / RESUME</p><h2 id="resume-title">Experience &amp; education.</h2></div>
-              <a className="button print-button" href="/Sutha_Thongkong_FlowCV.pdf" download="Sutha_Thongkong_FlowCV.pdf">Download Resume PDF <span>↓</span></a>
             </div>
             <div className="resume-grid">
               <aside className="resume-sidebar">

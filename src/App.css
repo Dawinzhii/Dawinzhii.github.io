@@ -29,7 +29,7 @@ nav a:hover { color:var(--text); }
 .button:hover { transform:translateY(-2px); }
 .primary { background:var(--accent); color:var(--accent-ink); }
 .text-button { color:var(--text); }
-.outline,.print-button { color:var(--text); background:transparent; border-color:var(--line); }
+.outline { color:var(--text); background:transparent; border-color:var(--line); }
 .hero-marquee { margin-top:auto; padding-top:72px; display:flex; justify-content:space-between; gap:20px; color:var(--muted); font:11px 'DM Mono'; letter-spacing:.12em; }
 .hero-marquee i { color:var(--accent); font-style:normal; }
 .section-label { color:var(--accent); margin:0; }
