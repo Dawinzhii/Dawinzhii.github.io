@@ -103,10 +103,10 @@ function App() {
                   <div className="resume-entry">
                     <div className="resume-entry-head"><div><h3>Matix.co.,ltd</h3><p>Worker</p></div><span>11/2016 – 11/2019<br />Nishio, Aichi, Japan</span></div>
                     <ul>
-                      <li>ปฏิบัติงานกลึงโลหะทุกวันเพื่อผลิตชิ้นส่วนตามแบบทางเทคนิค</li>
-                      <li>ใช้เครื่องมือวัด เช่น เวอร์เนียร์คาลิปเปอร์และไมโครมิเตอร์เพื่อตรวจสอบข้อกำหนด</li>
-                      <li>ทำความสะอาดเครื่องจักรและเปลี่ยนเครื่องมือขั้นพื้นฐานเพื่อป้องกันการชำรุดเสียหายระหว่างกะทำงาน</li>
-                      <li>บรรลุเป้าหมายผลผลิตรายวัน พร้อมทั้งรักษาความสะอาดและความปลอดภัยของพื้นที่ทำงาน (5S)</li>
+                      <li>Operated metalworking machinery daily to manufacture parts according to technical drawings.</li>
+                      <li>Used precision measuring tools, including vernier calipers and micrometers, to verify specifications and quality.</li>
+                      <li>Cleaned machinery and performed basic tool changes to prevent equipment damage during production shifts.</li>
+                      <li>Met daily production targets while maintaining workplace cleanliness and safety in accordance with 5S practices.</li>
                     </ul>
                   </div>
                 </section>
