@@ -6,7 +6,8 @@ Personal portfolio website for Sutha Thongkong, an AI & Full-Stack Developer wit
 
 - Resume-first layout with profile image, experience, education, and skills
 - Selected AI, full-stack, education, and mobile projects
-- Interactive project image galleries with keyboard navigation
+- Clearly separated project cards with interactive image galleries and keyboard navigation
+- Certificates and event highlights with full-size image previews
 - Bright, accessible visual theme
 - Responsive design
 

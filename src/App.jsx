@@ -33,8 +33,8 @@ const projects = [
     description: 'A course registration and timetable planning experience that helps students compare schedules, review class details, and organize their semester.',
     tags: ['Course registration', 'Timetable planning', 'Schedule patterns'],
     images: [
-      '/images/projects/courseflow-1.jpg',
       '/images/projects/courseflow-2.jpg',
+      '/images/projects/courseflow-1.jpg',
     ],
   },
   {
@@ -50,6 +50,33 @@ const projects = [
   },
 ]
 
+const highlights = [
+  {
+    type: 'Certificate',
+    title: 'Insights from Data and AI',
+    detail: 'Code.org · Certificate of Completion',
+    image: '/images/credentials/data-ai-certificate.jpeg',
+  },
+  {
+    type: 'Certificate',
+    title: 'AI-Preneur Hackathon',
+    detail: 'Chulalongkorn School of Integrated Innovation · March 15, 2026',
+    image: '/images/credentials/ai-preneur-certificate.jpeg',
+  },
+  {
+    type: 'Event',
+    title: 'AI-Preneur Hackathon',
+    detail: 'Team presentation · Central Region',
+    image: '/images/credentials/ai-preneur-event.jpeg',
+  },
+  {
+    type: 'Event',
+    title: 'Tech IDEA 2026',
+    detail: 'School of Information Technology · Sripatum University',
+    image: '/images/credentials/tech-idea-2026.jpeg',
+  },
+]
+
 function App() {
   const [viewer, setViewer] = useState(null)
 
@@ -57,7 +84,7 @@ function App() {
   const moveImage = (direction) => {
     setViewer((current) => {
       if (!current) return null
-      const count = projects[current.projectIndex].images.length
+      const count = current.images.length
       return { ...current, imageIndex: (current.imageIndex + direction + count) % count }
     })
   }
@@ -84,6 +111,7 @@ function App() {
         <nav aria-label="Main navigation">
           <a href="#resume">Resume</a>
           <a href="#projects">Projects</a>
+          <a href="#highlights">Certificates</a>
           <a href="#contact">Contact</a>
         </nav>
         <a className="header-link" href="https://github.com/Dawinzhii" target="_blank" rel="noreferrer">GitHub ↗</a>
@@ -139,9 +167,9 @@ function App() {
             </div>
 
             <div className="project-grid">
-              {projects.map((project, projectIndex) => (
+              {projects.map((project) => (
                 <article className="project-card" key={project.title}>
-                  <button className="project-cover" type="button" onClick={() => setViewer({ projectIndex, imageIndex: 0 })} aria-label={`Open ${project.title} gallery`}>
+                  <button className="project-cover" type="button" onClick={() => setViewer({ title: project.title, label: project.number, images: project.images, imageIndex: 0 })} aria-label={`Open ${project.title} gallery`}>
                     <img src={project.images[0]} alt={`${project.title} project preview`} loading="lazy" decoding="async" />
                     <span className="view-pill">View gallery <b>{project.images.length}</b></span>
                   </button>
@@ -152,7 +180,7 @@ function App() {
                     <div className="tag-list">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
                     <div className="thumbnail-row" aria-label={`${project.title} gallery thumbnails`}>
                       {project.images.map((image, imageIndex) => (
-                        <button type="button" key={image} onClick={() => setViewer({ projectIndex, imageIndex })} aria-label={`View ${project.title} image ${imageIndex + 1}`}>
+                        <button type="button" key={image} onClick={() => setViewer({ title: project.title, label: project.number, images: project.images, imageIndex })} aria-label={`View ${project.title} image ${imageIndex + 1}`}>
                           <img src={image} alt="" loading="lazy" decoding="async" />
                         </button>
                       ))}
@@ -161,6 +189,37 @@ function App() {
                 </article>
               ))}
             </div>
+          </div>
+        </section>
+
+        <section id="highlights" className="highlights-section page-shell" aria-labelledby="highlights-title">
+          <div className="highlights-heading">
+            <div>
+              <p className="overline">LEARNING · COMMUNITY · 2026</p>
+              <h2 id="highlights-title">Certificates<br />&amp; Events.</h2>
+            </div>
+            <p>A record of continuous learning, hands-on challenges, and the communities that shaped my work.</p>
+          </div>
+
+          <div className="highlight-groups">
+            {['Certificate', 'Event'].map((group) => (
+              <div className="highlight-group" key={group}>
+                <div className="group-title"><span>{group === 'Certificate' ? '01' : '02'}</span><h3>{group}s</h3></div>
+                <div className="highlight-grid">
+                  {highlights.filter((item) => item.type === group).map((item) => (
+                    <article className="highlight-card" key={`${item.type}-${item.title}`}>
+                      <button type="button" onClick={() => setViewer({ title: item.title, label: item.type, images: [item.image], imageIndex: 0 })} aria-label={`View ${item.title} ${item.type.toLowerCase()}`}>
+                        <img src={item.image} alt={`${item.title} ${item.type.toLowerCase()}`} loading="lazy" decoding="async" />
+                        <span>View image ↗</span>
+                      </button>
+                      <p>{item.type}</p>
+                      <h4>{item.title}</h4>
+                      <small>{item.detail}</small>
+                    </article>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         </section>
 
@@ -177,20 +236,20 @@ function App() {
       <footer className="page-shell"><span>© {new Date().getFullYear()} Sutha Thongkong</span><span>Portfolio · Resume</span><a href="#top">Back to top ↑</a></footer>
 
       {viewer && (
-        <div className="lightbox" role="dialog" aria-modal="true" aria-label={`${projects[viewer.projectIndex].title} image gallery`} onMouseDown={(event) => event.target === event.currentTarget && closeViewer()}>
+        <div className="lightbox" role="dialog" aria-modal="true" aria-label={`${viewer.title} image gallery`} onMouseDown={(event) => event.target === event.currentTarget && closeViewer()}>
           <div className="lightbox-top">
-            <div><span>{projects[viewer.projectIndex].number}</span><h2>{projects[viewer.projectIndex].title}</h2></div>
+            <div><span>{viewer.label}</span><h2>{viewer.title}</h2></div>
             <button type="button" onClick={closeViewer} aria-label="Close gallery">Close ×</button>
           </div>
           <div className="lightbox-stage">
-            <button className="gallery-arrow previous" type="button" onClick={() => moveImage(-1)} aria-label="Previous image">←</button>
-            <img src={projects[viewer.projectIndex].images[viewer.imageIndex]} alt={`${projects[viewer.projectIndex].title} screenshot ${viewer.imageIndex + 1}`} />
-            <button className="gallery-arrow next" type="button" onClick={() => moveImage(1)} aria-label="Next image">→</button>
+            {viewer.images.length > 1 && <button className="gallery-arrow previous" type="button" onClick={() => moveImage(-1)} aria-label="Previous image">←</button>}
+            <img src={viewer.images[viewer.imageIndex]} alt={`${viewer.title} image ${viewer.imageIndex + 1}`} />
+            {viewer.images.length > 1 && <button className="gallery-arrow next" type="button" onClick={() => moveImage(1)} aria-label="Next image">→</button>}
           </div>
           <div className="lightbox-bottom">
-            <span>{String(viewer.imageIndex + 1).padStart(2, '0')} / {String(projects[viewer.projectIndex].images.length).padStart(2, '0')}</span>
-            <div>{projects[viewer.projectIndex].images.map((image, index) => <button type="button" key={image} className={index === viewer.imageIndex ? 'active' : ''} onClick={() => setViewer({ ...viewer, imageIndex: index })} aria-label={`Go to image ${index + 1}`} />)}</div>
-            <p>Use arrow keys to navigate</p>
+            <span>{String(viewer.imageIndex + 1).padStart(2, '0')} / {String(viewer.images.length).padStart(2, '0')}</span>
+            <div>{viewer.images.map((image, index) => <button type="button" key={image} className={index === viewer.imageIndex ? 'active' : ''} onClick={() => setViewer({ ...viewer, imageIndex: index })} aria-label={`Go to image ${index + 1}`} />)}</div>
+            <p>{viewer.images.length > 1 ? 'Use arrow keys to navigate' : 'Click Close or press Esc'}</p>
           </div>
         </div>
       )}
