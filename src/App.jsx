@@ -3,136 +3,197 @@ import './App.css'
 
 const projects = [
   {
-    number: '01', type: 'AI · RAG · 3D', title: 'Buddy Builder AI',
-    description: 'A Thai-language feng shui assistant that turns knowledge into practical room layouts and answers.',
-    highlights: ['LangChain, ChromaDB & BGE-M3 embeddings', 'Claude & Groq layout generation streamed via SSE', '331-page thesis transformed into 40+ knowledge chunks'],
+    number: '01',
+    title: 'Buddy Builder AI',
+    category: 'AI · RAG · 3D',
+    description: 'An AI-powered feng shui room planning system that combines Thai knowledge retrieval with an interactive 3D design experience.',
+    tags: ['LangChain', 'ChromaDB', 'BGE-M3', 'Three.js'],
+    images: [
+      '/images/projects/buddy-1.jpg',
+      '/images/projects/buddy-2.jpg',
+      '/images/projects/buddy-3.jpg',
+    ],
   },
   {
-    number: '02', type: 'FULL-STACK · E-COMMERCE', title: 'BakeryMVC',
-    description: 'A complete bakery and café ordering experience with the business rules needed for real operations.',
-    highlights: ['ASP.NET Core MVC, EF Core & MySQL 8.0', 'Loyalty points, VAT and price snapshotting', 'Secure BCrypt authentication'],
+    number: '02',
+    title: 'BakeryMVC',
+    category: 'FULL-STACK · E-COMMERCE',
+    description: 'A complete bakery and café ordering platform with product browsing, cart management, secure authentication, VAT, and loyalty features.',
+    tags: ['ASP.NET Core MVC', 'MySQL', 'EF Core', 'Tailwind CSS'],
+    images: [
+      '/images/projects/bakery-1.png',
+      '/images/projects/bakery-2.png',
+      '/images/projects/bakery-3.png',
+    ],
   },
   {
-    number: '03', type: 'AUTOMATION · FINTECH', title: 'Realtime Finance Tracker',
-    description: 'A chat-first workflow for recording personal finances instantly and keeping the data organized.',
-    highlights: ['n8n, LINE Messaging API & Google Sheets', 'Real-time expense logging through chat', 'AI-assisted transaction categorization'],
+    number: '03',
+    title: 'CourseFlow',
+    category: 'WEB APP · EDUCATION',
+    description: 'A course registration and timetable planning experience that helps students compare schedules, review class details, and organize their semester.',
+    tags: ['Course registration', 'Timetable planning', 'Schedule patterns'],
+    images: [
+      '/images/projects/courseflow-1.jpg',
+      '/images/projects/courseflow-2.jpg',
+    ],
   },
   {
-    number: '04', type: 'MOBILE · TRANSPORTATION', title: 'SlideMe',
-    description: 'A mobile app for requesting slide and tow truck services when and where they are needed.',
-    highlights: ['Built with React Native', 'SQL database', 'Driver matching and location tracking'],
+    number: '04',
+    title: 'SlideMe',
+    category: 'MOBILE · TRANSPORTATION',
+    description: 'A mobile app for requesting slide and tow truck services, matching customers with drivers, and tracking locations throughout the journey.',
+    tags: ['React Native', 'SQL', 'Driver matching', 'Location tracking'],
+    images: [
+      '/images/projects/slideme-1.jpg',
+      '/images/projects/slideme-2.jpg',
+    ],
   },
 ]
 
 function App() {
-  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark')
+  const [viewer, setViewer] = useState(null)
+
+  const closeViewer = () => setViewer(null)
+  const moveImage = (direction) => {
+    setViewer((current) => {
+      if (!current) return null
+      const count = projects[current.projectIndex].images.length
+      return { ...current, imageIndex: (current.imageIndex + direction + count) % count }
+    })
+  }
 
   useEffect(() => {
-    document.documentElement.dataset.theme = theme
-    localStorage.setItem('theme', theme)
-  }, [theme])
+    if (!viewer) return undefined
+    document.body.classList.add('modal-open')
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') closeViewer()
+      if (event.key === 'ArrowRight') moveImage(1)
+      if (event.key === 'ArrowLeft') moveImage(-1)
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => {
+      document.body.classList.remove('modal-open')
+      window.removeEventListener('keydown', onKeyDown)
+    }
+  }, [viewer])
 
   return (
     <>
       <header className="site-header">
-        <a className="brand" href="#top" aria-label="Sutha Thongkong, home">ST<span>.</span></a>
+        <a className="brand" href="#top" aria-label="Sutha Thongkong home">SUTHA<span>®</span></a>
         <nav aria-label="Main navigation">
-          <a href="#work">Work</a><a href="#resume">Resume</a><a href="#contact">Contact</a>
+          <a href="#resume">Resume</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
         </nav>
-        <button className="theme-toggle" type="button" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}>
-          {theme === 'dark' ? '☀' : '☾'}
-        </button>
+        <a className="header-link" href="https://github.com/Dawinzhii" target="_blank" rel="noreferrer">GitHub ↗</a>
       </header>
 
       <main id="top">
-        <section className="hero section-shell">
-          <div className="eyebrow"><span /> Available for collaboration</div>
-          <h1>I build <span>useful things</span><br /><em>with data &amp; AI.</em></h1>
-          <div className="hero-bottom">
-            <p>I'm <strong>Sutha Thongkong</strong>, an AI &amp; Full-Stack Developer with a special interest in Data Science—turning complex information into clear, practical products.</p>
-            <div className="hero-actions">
-              <a className="button primary" href="#work">Explore my work <span>↘</span></a>
-              <a className="button text-button" href="#contact">Let's connect <span>→</span></a>
+        <section id="resume" className="resume-hero page-shell" aria-labelledby="resume-title">
+          <div className="profile-panel">
+            <div className="profile-image-wrap">
+              <img src="/images/profile.png" alt="Sutha Thongkong" />
+              <span className="availability">Open to work</span>
+            </div>
+            <p className="profile-note">Based in Samutprakan, Thailand</p>
+          </div>
+
+          <div className="resume-intro">
+            <p className="overline">AI &amp; FULL-STACK DEVELOPER · DATA SCIENCE</p>
+            <h1 id="resume-title">Sutha<br />Thongkong</h1>
+            <p className="lead">I build data-informed products, intelligent systems, and practical web experiences that turn complex ideas into useful tools.</p>
+            <div className="contact-row">
+              <a href="mailto:dawinzhy.crypto@gmail.com">Email ↗</a>
+              <a href="https://www.linkedin.com/in/sutha-thongkong" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+              <a href="https://github.com/Dawinzhii" target="_blank" rel="noreferrer">GitHub ↗</a>
             </div>
           </div>
-          <div className="hero-marquee" aria-hidden="true"><span>DATA SCIENCE</span><i>✦</i><span>ARTIFICIAL INTELLIGENCE</span><i>✦</i><span>FULL-STACK</span></div>
-        </section>
 
-        <section className="section-shell intro" aria-labelledby="about-title">
-          <p className="section-label">01 / ABOUT</p>
-          <div>
-            <h2 id="about-title">Curious by nature.<br />Practical by design.</h2>
-            <div className="intro-copy">
-              <p>I enjoy working where data, software, and real human needs meet. My focus is on RAG systems, NLP, automation workflows, and modern web experiences.</p>
-              <p>From preparing Thai-language knowledge for AI to building end-to-end applications, I care about making technology understandable, dependable, and genuinely useful.</p>
-            </div>
-          </div>
-        </section>
-
-        <section id="work" className="section-shell work" aria-labelledby="work-title">
-          <div className="section-heading"><p className="section-label">02 / SELECTED WORK</p><h2 id="work-title">Projects with purpose.</h2></div>
-          <div className="project-list">
-            {projects.map((project) => (
-              <article className="project-card" key={project.title}>
-                <div className="project-index">{project.number}</div>
-                <div className="project-content">
-                  <p className="project-type">{project.type}</p><h3>{project.title}</h3>
-                  <p className="project-description">{project.description}</p>
-                  <ul>{project.highlights.map((item) => <li key={item}>{item}</li>)}</ul>
-                </div>
-                <div className="project-mark" aria-hidden="true">↗</div>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section id="resume" className="resume" aria-labelledby="resume-title">
-          <div className="section-shell">
-            <div className="resume-heading">
-              <div><p className="section-label">03 / RESUME</p><h2 id="resume-title">Experience &amp; education.</h2></div>
-            </div>
-            <div className="resume-grid">
-              <aside className="resume-sidebar">
-                <div><h3>Contact</h3><a href="mailto:dawinzhy.crypto@gmail.com">dawinzhy.crypto@gmail.com</a><a href="tel:+66897735638">089-7735638</a><span>Samutprakan, Thailand</span></div>
-                <div><h3>Online</h3><a href="https://www.linkedin.com/in/sutha-thongkong" target="_blank" rel="noreferrer">LinkedIn ↗</a><a href="https://github.com/Dawinzhii" target="_blank" rel="noreferrer">github.com/Dawinzhii ↗</a></div>
-              </aside>
-              <div className="resume-details">
-                <section className="resume-block">
-                  <p className="resume-kicker">Work Experience</p>
-                  <div className="resume-entry">
-                    <div className="resume-entry-head"><div><h3>Matix.co.,ltd</h3><p>Worker</p></div><span>11/2016 – 11/2019<br />Nishio, Aichi, Japan</span></div>
-                    <ul>
-                      <li>Operated metalworking machinery daily to manufacture parts according to technical drawings.</li>
-                      <li>Used precision measuring tools, including vernier calipers and micrometers, to verify specifications and quality.</li>
-                      <li>Cleaned machinery and performed basic tool changes to prevent equipment damage during production shifts.</li>
-                      <li>Met daily production targets while maintaining workplace cleanliness and safety in accordance with 5S practices.</li>
-                    </ul>
-                  </div>
-                </section>
-
-                <section className="resume-block">
-                  <p className="resume-kicker">Education</p>
-                  <div className="resume-entry compact"><div><h3>Bachelor's Degree</h3><p>Sripatum University</p></div><span>2023 – Present<br />Bangkok</span></div>
-                  <div className="resume-entry compact"><div><h3>High Vocational Certificate in Computer Technician</h3><p>Samutprakan Technical College</p></div><span>2013 – 2015</span></div>
-                </section>
-
+          <div className="resume-facts">
+            <article>
+              <p className="fact-label">Experience</p>
+              <div className="fact-heading"><h2>Matix.co.,ltd</h2><span>2016—2019</span></div>
+              <p>Metalworking machine operator in Nishio, Aichi, Japan. Worked from technical drawings, verified parts with precision measuring tools, and maintained production quality and 5S safety standards.</p>
+            </article>
+            <article>
+              <p className="fact-label">Education</p>
+              <div className="education-item"><h2>Sripatum University</h2><span>2023—Present</span><p>Bachelor's Degree · Bangkok</p></div>
+              <div className="education-item"><h2>Samutprakan Technical College</h2><span>2013—2015</span><p>High Vocational Certificate in Computer Technician</p></div>
+            </article>
+            <article>
+              <p className="fact-label">Core toolkit</p>
+              <div className="toolkit">
+                {['Python', 'JavaScript', 'React', 'React Native', 'Node.js', 'ASP.NET Core', 'MySQL', 'RAG', 'LangChain', 'n8n'].map((item) => <span key={item}>{item}</span>)}
               </div>
+            </article>
+          </div>
+        </section>
+
+        <section id="projects" className="projects-section" aria-labelledby="projects-title">
+          <div className="page-shell">
+            <div className="section-intro">
+              <p className="overline">SELECTED PROJECTS · 2023—PRESENT</p>
+              <h2 id="projects-title">Work that solves<br />real problems.</h2>
+              <p>Click any project image to explore the gallery.</p>
+            </div>
+
+            <div className="project-grid">
+              {projects.map((project, projectIndex) => (
+                <article className="project-card" key={project.title}>
+                  <button className="project-cover" type="button" onClick={() => setViewer({ projectIndex, imageIndex: 0 })} aria-label={`Open ${project.title} gallery`}>
+                    <img src={project.images[0]} alt={`${project.title} project preview`} loading="lazy" decoding="async" />
+                    <span className="view-pill">View gallery <b>{project.images.length}</b></span>
+                  </button>
+                  <div className="project-copy">
+                    <div className="project-meta"><span>{project.number}</span><p>{project.category}</p></div>
+                    <h3>{project.title}</h3>
+                    <p className="project-description">{project.description}</p>
+                    <div className="tag-list">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
+                    <div className="thumbnail-row" aria-label={`${project.title} gallery thumbnails`}>
+                      {project.images.map((image, imageIndex) => (
+                        <button type="button" key={image} onClick={() => setViewer({ projectIndex, imageIndex })} aria-label={`View ${project.title} image ${imageIndex + 1}`}>
+                          <img src={image} alt="" loading="lazy" decoding="async" />
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </article>
+              ))}
             </div>
           </div>
         </section>
 
-        <section id="contact" className="contact section-shell" aria-labelledby="contact-title">
-          <p className="section-label">04 / CONTACT</p>
-          <h2 id="contact-title">Have an idea worth<br /><em>building together?</em></h2>
-          <p>I'm open to conversations about Data Science, AI, automation, and full-stack projects.</p>
-          <div className="contact-links">
-            <a className="button primary" href="https://www.linkedin.com/in/sutha-thongkong" target="_blank" rel="noreferrer">Connect on LinkedIn <span>↗</span></a>
-            <a className="button outline" href="https://github.com/Dawinzhii" target="_blank" rel="noreferrer">View GitHub <span>↗</span></a>
+        <section id="contact" className="contact-section page-shell" aria-labelledby="contact-title">
+          <p className="overline">LET'S BUILD SOMETHING USEFUL</p>
+          <h2 id="contact-title">Interested in working<br />together?</h2>
+          <div className="contact-bottom">
+            <p>I'm open to conversations about Data Science, AI, automation, and full-stack development.</p>
+            <a href="https://www.linkedin.com/in/sutha-thongkong" target="_blank" rel="noreferrer">Connect on LinkedIn <span>↗</span></a>
           </div>
         </section>
       </main>
 
-      <footer><span>© {new Date().getFullYear()} Sutha Thongkong</span><span>Bangkok, Thailand · ICT (UTC+7)</span><a href="#top">Back to top ↑</a></footer>
+      <footer className="page-shell"><span>© {new Date().getFullYear()} Sutha Thongkong</span><span>Portfolio · Resume</span><a href="#top">Back to top ↑</a></footer>
+
+      {viewer && (
+        <div className="lightbox" role="dialog" aria-modal="true" aria-label={`${projects[viewer.projectIndex].title} image gallery`} onMouseDown={(event) => event.target === event.currentTarget && closeViewer()}>
+          <div className="lightbox-top">
+            <div><span>{projects[viewer.projectIndex].number}</span><h2>{projects[viewer.projectIndex].title}</h2></div>
+            <button type="button" onClick={closeViewer} aria-label="Close gallery">Close ×</button>
+          </div>
+          <div className="lightbox-stage">
+            <button className="gallery-arrow previous" type="button" onClick={() => moveImage(-1)} aria-label="Previous image">←</button>
+            <img src={projects[viewer.projectIndex].images[viewer.imageIndex]} alt={`${projects[viewer.projectIndex].title} screenshot ${viewer.imageIndex + 1}`} />
+            <button className="gallery-arrow next" type="button" onClick={() => moveImage(1)} aria-label="Next image">→</button>
+          </div>
+          <div className="lightbox-bottom">
+            <span>{String(viewer.imageIndex + 1).padStart(2, '0')} / {String(projects[viewer.projectIndex].images.length).padStart(2, '0')}</span>
+            <div>{projects[viewer.projectIndex].images.map((image, index) => <button type="button" key={image} className={index === viewer.imageIndex ? 'active' : ''} onClick={() => setViewer({ ...viewer, imageIndex: index })} aria-label={`Go to image ${index + 1}`} />)}</div>
+            <p>Use arrow keys to navigate</p>
+          </div>
+        </div>
+      )}
     </>
   )
 }

@@ -4,10 +4,10 @@ Personal portfolio website for Sutha Thongkong, an AI & Full-Stack Developer wit
 
 ## Highlights
 
-- Selected AI, full-stack, and automation projects
-- Skills and professional profile
-- Resume content based on the original FlowCV document
-- Light and dark themes
+- Resume-first layout with profile image, experience, education, and skills
+- Selected AI, full-stack, education, and mobile projects
+- Interactive project image galleries with keyboard navigation
+- Bright, accessible visual theme
 - Responsive design
 
 Built with React and Vite. Deployed automatically to GitHub Pages.
